@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using static Functional.F;
 
 namespace ConsoleApp
 {
@@ -7,11 +7,10 @@ namespace ConsoleApp
     {
         public static void Main()
         {
-            using (var streamReader = new StreamReader("TestFile.txt"))
-            {
-                var line = streamReader.ReadToEnd();
-                Console.WriteLine(line);
-            }
+            Using(new StreamReader("TestFile.txt"), ReadFile)
+                .WriteLine();
+            
+            string ReadFile(StreamReader streamReader) => streamReader.ReadToEnd();
         }
     }
 }
